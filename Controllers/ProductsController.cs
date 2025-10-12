@@ -1,12 +1,18 @@
 using ApiEcommerce.Models;
 using ApiEcommerce.Models.Dtos;
 using ApiEcommerce.Repository.IRepository;
+using Asp.Versioning;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiEcommerce.Controllers
-{
-    [Route("api/[controller]")]
+{   
+    [Authorize(Roles = "Admin")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    // [ApiVersion("1.0")]
+    // [ApiVersion("2.0")]
+    [ApiVersionNeutral] //Al ser neutral sirve para todas las veriones
     [ApiController]
     public class ProductsController : ControllerBase
     {
@@ -23,6 +29,7 @@ namespace ApiEcommerce.Controllers
             _mapper = mapper;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]//Métadata para swagger
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -35,6 +42,7 @@ namespace ApiEcommerce.Controllers
         }
 
         // GETBYID
+        [AllowAnonymous]
         [HttpGet("{productId:int}", Name = "GetProduct")] //El Name sirve para que sea invocado por otro método
         [ProducesResponseType(StatusCodes.Status403Forbidden)]//Métadata para swagger
         [ProducesResponseType(StatusCodes.Status400BadRequest)]//Métadata para swagger
@@ -97,6 +105,7 @@ namespace ApiEcommerce.Controllers
         }
 
         // Obtener producto x categoria
+        [AllowAnonymous]
         [HttpGet("SearchProductByCategory/{categoryId:int}", Name = "GetProductForCategory")] //El Name sirve para que sea invocado por otro método
         [ProducesResponseType(StatusCodes.Status403Forbidden)]//Métadata para swagger
         [ProducesResponseType(StatusCodes.Status400BadRequest)]//Métadata para swagger

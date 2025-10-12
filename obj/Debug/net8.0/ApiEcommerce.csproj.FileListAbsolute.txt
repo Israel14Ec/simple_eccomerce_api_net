@@ -170,3 +170,9 @@ D:\Curso .net\ApiEcommerce\ApiEcommerce\obj\Debug\net8.0\refint\ApiEcommerce.dll
 D:\Curso .net\ApiEcommerce\ApiEcommerce\obj\Debug\net8.0\ApiEcommerce.pdb
 D:\Curso .net\ApiEcommerce\ApiEcommerce\obj\Debug\net8.0\ApiEcommerce.genruntimeconfig.cache
 D:\Curso .net\ApiEcommerce\ApiEcommerce\obj\Debug\net8.0\ref\ApiEcommerce.dll
+D:\Curso .net\ApiEcommerce\ApiEcommerce\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Curso .net\ApiEcommerce\ApiEcommerce\obj\Debug\net8.0\ApiEcommerce.sourcelink.json
+D:\Curso .net\ApiEcommerce\ApiEcommerce\bin\Debug\net8.0\Asp.Versioning.Abstractions.dll
+D:\Curso .net\ApiEcommerce\ApiEcommerce\bin\Debug\net8.0\Asp.Versioning.Http.dll
+D:\Curso .net\ApiEcommerce\ApiEcommerce\bin\Debug\net8.0\Asp.Versioning.Mvc.dll
+D:\Curso .net\ApiEcommerce\ApiEcommerce\bin\Debug\net8.0\Asp.Versioning.Mvc.ApiExplorer.dll

@@ -1,12 +1,18 @@
+using ApiEcommerce.Constants;
 using ApiEcommerce.Models.Dtos;
 using ApiEcommerce.Repository.IRepository;
+using Asp.Versioning;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ApiEcommerce.Controllers
+namespace ApiEcommerce.Controllers.V2
 {
-    [Route("api/[controller]")]
+    [Authorize(Roles = "Admin")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("2.0")] //El controlador acepta las dos versiones
     [ApiController]
+    // [EnableCors(PolicyNames.AllowSpecificOrigin)] //Política cors aplicado a nivel de controlador
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryRepository _categoryRepository;
@@ -16,15 +22,18 @@ namespace ApiEcommerce.Controllers
         {
             _categoryRepository = categoryRepository;
             _mapper = mapper;
-        }
-
+        }              
+        
         //GET ALL
+        [AllowAnonymous] //Permite hacer la petición sin estar autenticados
         [HttpGet] //Método HTTP
         [ProducesResponseType(StatusCodes.Status403Forbidden)]//Métadata para swagger
         [ProducesResponseType(StatusCodes.Status200OK)]//Métadata para swagger
-        public IActionResult GetCategories()
+        // [EnableCors(PolicyNames.AllowSpecificOrigin)] //Política cors aplicado a nivel de método
+        [MapToApiVersion("2.0")] //Especificamos que es para la versión 2.0
+        public IActionResult GetCategoriesOrderById()
         {
-            var categories = _categoryRepository.GetCategories(); //Instancia del repositorio
+            var categories = _categoryRepository.GetCategories().OrderByDescending(cat => cat.Id); //Instancia del repositorio
             var categoriesDto = new List<CategoryDto>(); //Lista de categories DTO
             //Pasa por automapper, para formatear la respuesta como lo definido en el DTO
             foreach (var category in categories)
@@ -37,14 +46,22 @@ namespace ApiEcommerce.Controllers
 
 
         // GETBYID
+         [AllowAnonymous]
         [HttpGet("{id:int}", Name = "GetCategoryById")] //El Name sirve para que sea invocado por otro método
+        //Peticion guardada en cache
+        [ResponseCache(CacheProfileName = CacheProfiles.Default10)]
+        // [ResponseCache(
+        //     Duration = 20 //10 segundos de duración
+        // )] 
         [ProducesResponseType(StatusCodes.Status403Forbidden)]//Métadata para swagger
         [ProducesResponseType(StatusCodes.Status400BadRequest)]//Métadata para swagger
         [ProducesResponseType(StatusCodes.Status404NotFound)]//Métadata para swagger
         [ProducesResponseType(StatusCodes.Status200OK)]//Métadata para swagger
         public IActionResult GetCategoryById(int id)
         {
+            Console.WriteLine($"Categoría con el ID: {id} a las {DateTime.Now}");
             var category = _categoryRepository.GetCategory(id);
+            Console.WriteLine($"Respuesta con el ID: {id}");
             if (category == null)
             {
                 return NotFound($"La categoria {id} no fue encontrada"); //Mensaje personalizado
