@@ -1,10 +1,12 @@
 using System.Text;
 using ApiEcommerce.Constants;
 using ApiEcommerce.Mapping;
+using ApiEcommerce.Models;
 using ApiEcommerce.Repository;
 using ApiEcommerce.Repository.IRepository;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -31,6 +33,12 @@ builder.Services.AddAutoMapper(cfg => { },
     typeof(ProductProfile).Assembly,
     typeof(UserProfile).Assembly
 );
+
+/* AÑADIMOS IDENTITY: para autenticación/autorización */
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+  .AddEntityFrameworkStores<ApplicationDbContext>()
+  .AddDefaultTokenProviders();
+
 builder.Services.AddAuthentication(options =>
     {
       // Especifica que el esquema predeterminado de autenticación y desafío será JWT (Bearer Token)
@@ -192,6 +200,9 @@ if (app.Environment.IsDevelopment())
   });
 
 }
+
+//Habilitar archivos estáticos
+app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 

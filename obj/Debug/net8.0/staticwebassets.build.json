@@ -1,11 +1,39 @@
 {
   "Version": 1,
-  "Hash": "vjRw7597cIXBKWjHJFdaxWQWnR/TKJ2v/RxzNAvejv8=",
+  "Hash": "6snp3pcPwqNb+xawtr0Kb+Nv3qi7bg5ugeCaHX5CC3c=",
   "Source": "ApiEcommerce",
   "BasePath": "_content/ApiEcommerce",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "ApiEcommerce\\wwwroot",
+      "Source": "ApiEcommerce",
+      "ContentRoot": "D:\\Curso .net\\ApiEcommerce\\ApiEcommerce\\wwwroot\\",
+      "BasePath": "_content/ApiEcommerce",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\Curso .net\\ApiEcommerce\\ApiEcommerce\\wwwroot\\ProductsImages\\010d64fe1-18dd-46f3-a10c-410888d9dc92.avif",
+      "SourceId": "ApiEcommerce",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Curso .net\\ApiEcommerce\\ApiEcommerce\\wwwroot\\",
+      "BasePath": "_content/ApiEcommerce",
+      "RelativePath": "ProductsImages/010d64fe1-18dd-46f3-a10c-410888d9dc92.avif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ProductsImages\\010d64fe1-18dd-46f3-a10c-410888d9dc92.avif"
+    }
+  ]
 }

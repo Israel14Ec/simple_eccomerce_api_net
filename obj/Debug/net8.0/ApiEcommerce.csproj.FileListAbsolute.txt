@@ -176,3 +176,9 @@ D:\Curso .net\ApiEcommerce\ApiEcommerce\bin\Debug\net8.0\Asp.Versioning.Abstract
 D:\Curso .net\ApiEcommerce\ApiEcommerce\bin\Debug\net8.0\Asp.Versioning.Http.dll
 D:\Curso .net\ApiEcommerce\ApiEcommerce\bin\Debug\net8.0\Asp.Versioning.Mvc.dll
 D:\Curso .net\ApiEcommerce\ApiEcommerce\bin\Debug\net8.0\Asp.Versioning.Mvc.ApiExplorer.dll
+D:\Curso .net\ApiEcommerce\ApiEcommerce\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\Curso .net\ApiEcommerce\ApiEcommerce\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\Curso .net\ApiEcommerce\ApiEcommerce\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\Curso .net\ApiEcommerce\ApiEcommerce\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+D:\Curso .net\ApiEcommerce\ApiEcommerce\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+D:\Curso .net\ApiEcommerce\ApiEcommerce\bin\Debug\net8.0\ApiEcommerce.staticwebassets.runtime.json

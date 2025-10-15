@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Curso .net\\ApiEcommerce\\ApiEcommerce\\wwwroot\\ProductsImages\\010d64fe1-18dd-46f3-a10c-410888d9dc92.avif",
+      "PackagePath": "staticwebassets\\ProductsImages\\010d64fe1-18dd-46f3-a10c-410888d9dc92.avif"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ApiEcommerce.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.ApiEcommerce.props",
+      "PackagePath": "build\\ApiEcommerce.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.ApiEcommerce.props",
+      "PackagePath": "buildMultiTargeting\\ApiEcommerce.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.ApiEcommerce.props",
+      "PackagePath": "buildTransitive\\ApiEcommerce.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

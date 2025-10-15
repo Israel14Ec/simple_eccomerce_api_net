@@ -68,7 +68,7 @@ namespace ApiEcommerce.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]//Métadata para swagger
         [ProducesResponseType(StatusCodes.Status201Created)]//Métadata para swagger
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]//Métadata para swagger
-        public IActionResult CreateProduct([FromBody] CreateProductDto createProductDto) //Recibe el body del request
+        public IActionResult CreateProduct([FromForm] CreateProductDto createProductDto) //Recibe el body del request
         {
 
             //Validar
@@ -93,6 +93,41 @@ namespace ApiEcommerce.Controllers
 
 
             var product = _mapper.Map<Product>(createProductDto);
+
+            //Agregando imagen
+            if(createProductDto.Image != null)
+            {
+                string fileName = product.ProductId + Guid.NewGuid().ToString() + Path.GetExtension(createProductDto.Image.FileName);
+                var imagesFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "ProductsImages");
+
+                //Válida que exista el directorio
+                if (!Directory.Exists(imagesFolder))
+                {
+                    //Crea el directorio
+                    Directory.CreateDirectory(imagesFolder);
+                }
+
+                var filePath = Path.Combine(imagesFolder, fileName);
+
+                FileInfo file = new FileInfo(filePath);
+
+                //Comprobar que no exista ya esa imagen
+                if (file.Exists)
+                {
+                    file.Delete();
+                }
+                
+                //El using asegura que un recurso se libere automáticamente cuando deja de usarse.
+                using var fileStream = new FileStream(filePath, FileMode.Create); //Creamos el archivo
+                createProductDto.Image.CopyTo(fileStream);
+                var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.Value}{HttpContext.Request.PathBase.Value}";
+                product.ImgUrl = $"{baseUrl}/ProductsImages/{fileName}";
+                product.ImgUrlLocal = filePath;
+            } else
+            {
+                product.ImgUrl = "https://placehold.co/300x300";
+            }
+
 
             if (!_productRepository.CreateProduct(product))
             {
@@ -180,7 +215,7 @@ namespace ApiEcommerce.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]//Métadata para swagger
         [ProducesResponseType(StatusCodes.Status204NoContent)]//Métadata para swagger
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]//Métadata para swagger
-        public IActionResult UpdateProduct(int productId, [FromBody] UpdateProductDto updateProductDto)
+        public IActionResult UpdateProduct(int productId, [FromForm] UpdateProductDto updateProductDto)
         {
             if (updateProductDto == null)
             {
@@ -200,9 +235,46 @@ namespace ApiEcommerce.Controllers
                 return BadRequest(ModelState);
             }
 
+
+
             // Mapear cambios del DTO
             _mapper.Map(updateProductDto, product);
 
+            //Agregando imagen
+            if (updateProductDto.Image != null)
+            {
+                string fileName = product.ProductId + Guid.NewGuid().ToString() + Path.GetExtension(updateProductDto.Image.FileName);
+                var imagesFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "ProductsImages");
+
+                //Válida que exista el directorio
+                if (!Directory.Exists(imagesFolder))
+                {
+                    //Crea el directorio
+                    Directory.CreateDirectory(imagesFolder);
+                }
+
+                var filePath = Path.Combine(imagesFolder, fileName);
+
+                FileInfo file = new FileInfo(filePath);
+
+                //Comprobar que no exista ya esa imagen
+                if (file.Exists)
+                {
+                    file.Delete();
+                }
+
+                //El using asegura que un recurso se libere automáticamente cuando deja de usarse.
+                using var fileStream = new FileStream(filePath, FileMode.Create); //Creamos el archivo
+                updateProductDto.Image.CopyTo(fileStream);
+                var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.Value}{HttpContext.Request.PathBase.Value}";
+                product.ImgUrl = $"{baseUrl}/ProductsImages/{fileName}";
+                product.ImgUrlLocal = filePath;
+            }
+            else
+            {
+                product.ImgUrl = "https://placehold.co/300x300";
+            }
+            
             if (!_productRepository.UpdateProduct(product))
             {
                 ModelState.AddModelError("CustomError", $"Algo salió mal al actualizar el registro {product.Name}");

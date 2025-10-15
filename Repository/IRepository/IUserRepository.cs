@@ -5,13 +5,27 @@ namespace ApiEcommerce.Repository.IRepository;
 
 public interface IUserRepository
 {
-    ICollection<User> GetUsers();
 
-    User? GetUser(int id);
+
+    //Interface para auth manual
+    // ICollection<User> GetUsers();
+
+    //Interface para auth con Identity
+    ICollection<ApplicationUser> GetUsers();
+
+       //Interface para auth manual
+    //    User? GetUser(int id);
+
+    //Interface para auth con Identity
+    ApplicationUser? GetUser(string id);
 
     bool IsUniqueUser(string username);
 
     Task<UserLoginResponseDto> Login(UserLoginDto user);
 
-    Task<User> Register(CreateUserDto createUserDto);
+    //Interface para registar manual
+    // Task<User> Register(CreateUserDto createUserDto);
+    
+    //Interface para register con Identity
+    Task<UserDataDto> Register(CreateUserDto createUserDto);
 }
